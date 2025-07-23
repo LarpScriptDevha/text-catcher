@@ -1,20 +1,12 @@
 export default {
-  async fetch(request, env, ctx) {
-    const file = await fetch("data.txt");
-
-    if (!file.ok) {
-      return new Response("Could not load data.txt", {
-        status: 500,
-        headers: { "Content-Type": "text/plain" }
+  async fetch(request) {
+    try {
+      // Your existing logic here
+      return new Response("Hello world", {
+        headers: { "Content-Type": "text/plain" },
       });
+    } catch (error) {
+      return new Response("Internal Server Error", { status: 500 });
     }
-
-    const text = await file.text();
-
-    return new Response(text, {
-      headers: {
-        "Content-Type": "text/plain"
-      }
-    });
-  }
+  },
 };
